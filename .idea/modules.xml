@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/apigateway/apigateway.iml" filepath="$PROJECT_DIR$/apigateway/apigateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dashboard-hystrix/dashboard-hystrix.iml" filepath="$PROJECT_DIR$/dashboard-hystrix/dashboard-hystrix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/discovery-eureka/discovery-eureka.iml" filepath="$PROJECT_DIR$/discovery-eureka/discovery-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway-zuul/gateway-zuul.iml" filepath="$PROJECT_DIR$/gateway-zuul/gateway-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/msa_study.iml" filepath="$PROJECT_DIR$/.idea/msa_study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/product-catalog/product-catalog.iml" filepath="$PROJECT_DIR$/product-catalog/product-catalog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/product-order/product-order.iml" filepath="$PROJECT_DIR$/product-order/product-order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/product-user/product-user.iml" filepath="$PROJECT_DIR$/product-user/product-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/turbine-server/turbine-server.iml" filepath="$PROJECT_DIR$/turbine-server/turbine-server.iml" />
+    </modules>
+  </component>
+</project>

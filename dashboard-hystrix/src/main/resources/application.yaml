@@ -1,0 +1,22 @@
+server:
+  port: 7070
+
+spring:
+  application:
+    name: dashboard-hystrix
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:https://localhost:8888
+
+  #Config Server
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      name: config-server
+
+#Eureka Client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9091/eureka/

@@ -1,0 +1,19 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: discovery-eureka
+
+  #Config Server
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      name: config-server
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/

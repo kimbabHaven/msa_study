@@ -1,0 +1,13 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      server:
+        encrypt.enabled: true
+        git:
+          uri: https://github.com/kimbabHaven/msa_study.git

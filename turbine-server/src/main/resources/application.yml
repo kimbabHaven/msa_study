@@ -1,0 +1,27 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: turbine-server
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:https://localhost:8888
+
+  #Config Server
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      name: config-server
+
+#Eureka Client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9091/eureka/
+
+#Turbine Server
+turbine:
+  appConfig: product-catalog,product-order,product-user
+  clusterNameExpression: new String("default")
