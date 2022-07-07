@@ -1,7 +1,6 @@
 package com.example.productorder.jpa;
 
-public interface IProductOrderRepository {
+import org.springframework.data.repository.CrudRepository;
 
-    public String saveProductOrder(ProductOrderEntity productOrderEntity);
-
+public interface IProductOrderRepository extends CrudRepository<ProductOrderEntity, String> {
 }

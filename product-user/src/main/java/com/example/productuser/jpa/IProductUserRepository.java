@@ -1,9 +1,7 @@
 package com.example.productuser.jpa;
 
-public interface IProductUserRepository {
+import org.springframework.data.repository.CrudRepository;
 
+public interface IProductUserRepository extends CrudRepository<ProductUserEntity, String> {
     public ProductUserEntity findByUserName(String userName);
-    public int createUserTable(ProductUserEntity productUserEntity);
-    public int insertUser(ProductUserEntity productUserEntity);
-
 }

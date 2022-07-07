@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
-//@EnableCircuitBreaker
+@EnableCircuitBreaker
 @EnableEurekaClient
 @SpringBootApplication
 public class ProductCatalogApplication {

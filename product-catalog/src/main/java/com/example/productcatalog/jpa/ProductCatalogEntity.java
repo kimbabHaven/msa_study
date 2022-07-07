@@ -2,12 +2,13 @@ package com.example.productcatalog.jpa;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
-public class ProductCatalogEntity {
+@Entity
+@Table(name = "product_catalog")
+public class ProductCatalogEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

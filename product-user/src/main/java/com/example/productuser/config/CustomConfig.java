@@ -1,4 +1,4 @@
-package com.example.productuser;
+package com.example.productuser.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

@@ -8,6 +8,7 @@ import com.example.productorder.service.ProductOrderServiceImpl;
 import com.example.productorder.vo.RequestProductOrder;
 import com.example.productorder.vo.ResponseProductOrder;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
+@RestController
 public class ProductOrderController {
 
     @Autowired
@@ -32,17 +36,17 @@ public class ProductOrderController {
     private ICatalogService iCatalogService;
 
     @HystrixCommand
-    @RequestMapping(value = "/orderProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/product-order/orderProduct", method = RequestMethod.POST)
     public ResponseEntity<ResponseProductOrder> orderProduct(@RequestBody RequestProductOrder requestProductOrder) {
 
         //멤버인지 확인
         if(iUserService.checkUser(requestProductOrder.getUserName())) {
-            System.out.println(requestProductOrder.getUserName() + "은 가입되어 있는 회원");
+            log.info("{}은 가입되어 있는 회원", requestProductOrder.getUserName());
         }
 
         //주문할 수 있는 상품인지 확인
         if(!iCatalogService.checkProductQuantity(requestProductOrder.getProductName(), requestProductOrder.getCount())) {
-            System.out.println(requestProductOrder.getProductName() + "은 주문할 수 없는 상품");
+            log.info("{}은 주문할 수 없는 상품", requestProductOrder.getProductName());
             return null;
         }
 
@@ -54,7 +58,7 @@ public class ProductOrderController {
         productOrderServiceImpl.orderProduct(orderDto);
 
         //kafka
-        kafkaProducer.send("hoony-kafka-test", requestProductOrder);
+        kafkaProducer.send("kafka-test", requestProductOrder);
 
         ResponseProductOrder responseProductOrder = new ResponseProductOrder();
         responseProductOrder.setProductName(requestProductOrder.getProductName());

@@ -1,9 +1,12 @@
 server:
   port: 0
 
+signing:
+  key: jwtkey #사용할 서명키
+
 spring:
   application:
-    name: config-server
+    name: product-user
 
 #  rabbitmq:
 #    host: 127.0.0.1
@@ -37,6 +40,20 @@ spring:
     open-in-view: false
     generate-ddl: true
 
+  security:
+    oauth2:
+      resource:
+        user-info-uri: http://localhost:8095/auth/user    # OAuth2 콜백 URL
+
+#  security:
+#    oauth2:
+#      client:
+#        client-id: auth_id #client를 식별하는 고유 정보
+#        client-secret: auth_secret # 엑세스 토큰을 교환하기 위한 비공개 정보(보통 암호)
+#      resource:
+#        jwt:
+#          key-value: jwt_secret_key
+
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
@@ -48,3 +65,10 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
 
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh, info, metrics, prometheus

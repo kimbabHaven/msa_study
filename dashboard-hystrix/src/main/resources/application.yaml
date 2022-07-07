@@ -20,3 +20,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:9091/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh, info, metrics, prometheus

@@ -5,11 +5,15 @@ import com.example.productuser.jpa.IProductUserRepository;
 import com.example.productuser.jpa.ProductUserEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class ProductUserServiceImpl implements ProductUserService {
 
+    @Autowired
     private IProductUserRepository iProductUserRepository;
 
     @Override
@@ -25,31 +29,22 @@ public class ProductUserServiceImpl implements ProductUserService {
         return userDto;
     }
     @Override
-    public ProductUserDto createUser(ProductUserDto productUserDto) {
+    public ProductUserDto insertUser(ProductUserDto productUserDto) {
         productUserDto.setUserId(UUID.randomUUID().toString());
 
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         ProductUserEntity userEntity = mapper.map(productUserDto, ProductUserEntity.class);
 
-        iProductUserRepository.insertUser(userEntity);
+        iProductUserRepository.save(userEntity);
 
         ProductUserDto userDto = mapper.map(userEntity, ProductUserDto.class);
 
         return userDto;
     }
 
-//    @Override
-//    public String selectUserName(ProductUserDto productOrderDto) {
-//
-//        ProductUserEntity productUserEntity = new ProductUserEntity();
-//        productUserEntity.setUserName(productOrderDto.getUserName());
-//        productUserEntity.setProductName(productOrderDto.getProductName());
-//        productUserEntity.setCount(productOrderDto.getCount());
-//        productUserEntity.setUserName(productOrderDto.getUserName());
-//
-//        iProductUserRepository.saveProductOrder(productUserEntity);
-//
-//        return productUserEntity.getOrderId();
-//    }
+    @Override
+    public Iterable<ProductUserEntity> getUserAll() {
+        return iProductUserRepository.findAll();
+    }
 }

@@ -5,11 +5,16 @@ import com.example.productcatalog.jpa.IProductCatalogRepository;
 import com.example.productcatalog.jpa.ProductCatalogEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
+@Service
 public class ProductCatalogServiceImpl implements ProductCatalogService {
 
+    @Autowired
     private IProductCatalogRepository iProductCatalogRepository;
 
     @Override
@@ -24,6 +29,9 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
 
     @Override
     public ProductCatalogDto getProduct(String productName) {
+        if (productName == null || "".equals(productName)) {
+            return null;
+        }
 
         ProductCatalogEntity productCatalogEntity = iProductCatalogRepository.findByProductName(productName);
 
@@ -37,13 +45,13 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
 
     @Override
     public ProductCatalogDto insertProduct(ProductCatalogDto productCatalogDto) {
+        productCatalogDto.setProductId(UUID.randomUUID().toString());
 
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         ProductCatalogEntity catalogEntity = mapper.map(productCatalogDto, ProductCatalogEntity.class);
 
-        iProductCatalogRepository.insertProduct(catalogEntity);
-
+        iProductCatalogRepository.save(catalogEntity);
         ProductCatalogDto catalogDto = mapper.map(catalogEntity, ProductCatalogDto.class);
 
         return catalogDto;
@@ -61,10 +69,13 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         ProductCatalogEntity catalogEntity = mapper.map(productCatalogDto, ProductCatalogEntity.class);
 
-        iProductCatalogRepository.updateProduct(catalogEntity);
+        iProductCatalogRepository.save(catalogEntity);
 
         ProductCatalogDto catalogDto = mapper.map(catalogEntity, ProductCatalogDto.class);
-
         return catalogDto;
+    }
+    @Override
+    public Iterable<ProductCatalogEntity> getProductAll() {
+        return iProductCatalogRepository.findAll();
     }
 }

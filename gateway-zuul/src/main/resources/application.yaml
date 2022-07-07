@@ -1,5 +1,18 @@
 server:
-  port: 9090
+  port: 8000
+
+signing:
+  key: jwtkey #사용할 서명키
+
+#Eureka Client
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9091/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # 인스턴스를 구별하기 위한 설정
 
 spring:
   application:
@@ -15,23 +28,24 @@ spring:
 #      uri: http://localhost:8888
 #      name: config-server
 
-#Eureka Client
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9091/eureka/
-
 #Zuul Routing
 zuul:
   routes:
-    productUser: #routing id
-      path: /productUser/** #zuul context root
+    product-user: #routing id
+      path: /product-user/** #zuul context root
       serviceId: product-user #spring application name
 
-    productCatalog:
-      path: /productCatalog/**
+    product-catalog:
+      path: /product-catalog/**
       serviceId: product-catalog
 
-    productOrder:
-      path: /productOrder/**
+    product-order:
+      path: /product-order/**
       serviceId: product-order
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh, info, metrics, prometheus

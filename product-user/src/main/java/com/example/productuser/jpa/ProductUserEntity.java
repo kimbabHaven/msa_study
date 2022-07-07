@@ -2,11 +2,11 @@ package com.example.productuser.jpa;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name = "product_user")
 public class ProductUserEntity {
 
     @Id
@@ -15,4 +15,5 @@ public class ProductUserEntity {
 
     private String userName; //회원이름
     private String email; //회원 이메일
+    private String password; //회원 비밀번호
 }

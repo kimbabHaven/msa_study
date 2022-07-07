@@ -3,11 +3,12 @@ package com.example.productorder.jpa;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "product-order")
-public class ProductOrderEntity {
+@Table(name = "product_order")
+public class ProductOrderEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
